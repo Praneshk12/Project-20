@@ -39,8 +39,8 @@ function draw() {
         cat.velocityX = 0;
         cat.addAnimation("catLastImage", cat3Img);
         cat.changeAnimation("catLastImage");
-        mouse.addAnimation("mouseLastImg", mouse3Img);
-        mouse.changeAnimation("mouseLastImg");
+        mouse.addAnimation("mouseLastImage", mouse3Img);
+        mouse.changeAnimation("mouseLastImage");
         
     }
 
