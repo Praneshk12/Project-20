@@ -34,13 +34,14 @@ function draw() {
     background(255);
     keyPressed();
     
-    
     //Write condition here to evalute if tom and jerry collide
     if(cat.x - mouse.x < (cat.width - mouse.width)/2) {
         cat.velocityX = 0;
         cat.addAnimation("catLastImage", cat3Img);
         cat.changeAnimation("catLastImage");
-        mouse.changeImage(mouse3Img);
+        mouse.addAnimation("mouseLastImg", mouse3Img);
+        mouse.changeAnimation("mouseLastImg");
+        
     }
 
     drawSprites();
@@ -54,4 +55,6 @@ function keyPressed(){
         cat.addAnimation("catRunning", cat2Img);
         cat.changeAnimation("catRunning");
     }
+    
+    
 }
