@@ -1,60 +1,67 @@
-var cat, cat1Img, cat2Img, cat3Img;
-var mouse, mouse1Img, mouse2Img, mouse3Img;
 var BG, BG_Img;
+var cat, catIMG;
+var mouse;
+
+var gameState = "PLAY" ;
 function preload() {
-    //load the images here
-    cat1Img = loadImage("cat1.png");
-    cat2Img = loadAnimation("cat2.png", "cat3.png");
-    cat3Img = loadImage("cat4.png");
-    mouse1Img = loadImage("mouse1.png");
-    mouse2Img = loadAnimation("mouse2.png", "mouse3.png");
-    mouse3Img = loadImage("mouse4.png");
-    BG_Img = loadImage("garden.png");
-}
-
-function setup(){
-    createCanvas(1000,800);
-    
-    BG = createSprite(50, 200, 20, 20);
-    BG.addImage(BG_Img);
-    BG.scale = 1.7;
-
-    //create tom and jerry sprites here
-    cat = createSprite(700, 600, 20, 20);
-    cat.addImage(cat1Img);
-    cat.scale = 0.25;
-    
-    mouse = createSprite(120, 600, 20, 20);
-    mouse.addImage(mouse1Img);
-    mouse.scale = 0.25;
+  backImg = loadImage("garden.png")
+  catImg1= loadAnimation("cat1.png");
+  catImg2=loadAnimation("cat2.png","cat3.png");
+  catImg3= loadAnimation("cat4.png");
+  mouseImg1=loadAnimation("mouse1.png");
+  mouseImg2= loadAnimation("mouse2.png","mouse3.png");
+  mouseImg3=loadAnimation("mouse4.png");
 
 }
+function setup() {
+  createCanvas(800,600);
+  //creates Backgrounds and adds image to it
+  BG = createSprite(400,250, 50, 50);
+  BG.addImage(backImg);
+  BG.scale = 1;
 
+  //creates cat and adds image to it
+  cat = createSprite(600,500,1,1);
+  cat.addAnimation("catRunning", catImg1);
+  cat.scale = 0.2;
+
+  //creates mouse and adds image to it
+  mouse = createSprite(200,500,10,10);
+  mouse.addAnimation("mouseRunning", mouseImg1);
+  mouse.scale = 0.15;
+}
+ 
 function draw() {
-    background(255);
-    keyPressed();
-    
-    //Write condition here to evalute if tom and jerry collide
-    if(cat.x - mouse.x < (cat.width - mouse.width)/2) {
-        cat.velocityX = 0;
-        cat.addAnimation("catLastImage", cat3Img);
-        cat.changeAnimation("catLastImage");
-        mouse.addAnimation("mouseLastImage", mouse3Img);
-        mouse.changeAnimation("mouseLastImage");
-        
-    }
-
-    drawSprites();
+  background(0);
+  drawSprites();
+  
+  //if cat is touching mouse...
+  if(cat.x - mouse.x < (cat.width - mouse.width)/2) { 
+        //cat velocity stops
+        cat.velocityX= 0;
+        //changes animation
+        cat.addAnimation("tomLastImage", catImg3);
+        cat.x = 300;
+        //scales cat image
+        cat.scale= 0.2;
+        cat.changeAnimation("tomLastImage");
+        mouse.addAnimation("jerryLastImage", mouseImg3);
+        //scales mouse image
+        mouse.scale= 0.15;
+        mouse.changeAnimation("jerryLastImage");
+    }  
 }
-
 
 function keyPressed(){
-//For moving and changing animation write code here
-    if(keyCode === LEFT_ARROW) {
-        cat.velocityX = -5;
-        cat.addAnimation("catRunning", cat2Img);
-        cat.changeAnimation("catRunning");
-    }
-    
-    
+
+    //if left arrow is pressed...
+  if(keyCode === LEFT_ARROW){
+      //cat moves leftward and changes animation
+      cat.velocityX = -5; 
+      cat.addAnimation("catRunning", catImg2);
+      cat.changeAnimation("something");
+      //mouse changes animation
+      mouse.addAnimation("mouseSomething", mouseImg2);
+      mouse.changeAnimation("something2");
+  }
 }
